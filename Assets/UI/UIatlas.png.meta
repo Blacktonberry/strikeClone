@@ -1,0 +1,147 @@
+fileFormatVersion: 2
+guid: d619b769951f3914c92d3f5ba8952d69
+timeCreated: 1484255548
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Logo
+    21300002: UI
+    21300004: Normal
+    21300006: Slider
+    21300008: Selected
+    21300010: Selected
+    21300012: UIatlas_0
+    21300014: UI-Ammo
+    21300016: Unselected
+    21300018: Hp Bar
+    21300020: Hp Bar Background
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: UIatlas_0
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 625
+        width: 7
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 674
+        width: 429
+        height: 339
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: UI-Ammo
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 899
+        width: 434
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Unselected
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 689
+        width: 488
+        height: 80
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Slider
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 590
+        width: 412
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Selected
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 599
+        width: 488
+        height: 80
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hp Bar
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 487
+        width: 383
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hp Bar Background
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 401
+        width: 383
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
