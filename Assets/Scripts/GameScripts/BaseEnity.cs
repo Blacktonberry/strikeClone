@@ -38,14 +38,10 @@ public class BaseEnity : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Awake() {
+	protected virtual void Awake() {
         enityHp = maxHP;
     }
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public virtual void Damage(float bulletDamage)
     {

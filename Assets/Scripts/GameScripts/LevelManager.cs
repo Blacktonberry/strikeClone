@@ -7,6 +7,9 @@ public class LevelManager : MonoBehaviour {
     [SerializeField]
     private PoolHandeler poolHandeler;
 
+    private bool radarActive = true;
+
+
     public PlayerControler PlayerCon;
 
     void Awake()
@@ -19,6 +22,22 @@ public class LevelManager : MonoBehaviour {
 
         Instance = this;
         poolHandeler.GenetatePool();
+    }
+
+    void Update()
+    {
+
+    }
+
+    public bool CanAiGetPlayer(ref Vector3 playerLocation)
+    {
+        if (radarActive) { playerLocation = PlayerCon.transform.position; return true; }
+        else { return false; }
+    }
+
+    public Vector3 AiSeesPlayer()
+    {
+        return PlayerCon.transform.position;
     }
 
     public bool FireBullet(EnitySide newSide, Vector3 initalPosition, Quaternion initalDirection)

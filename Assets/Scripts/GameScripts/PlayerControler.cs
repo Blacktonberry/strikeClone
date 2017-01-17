@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControler : MonoBehaviour {
+public class PlayerControler : BaseEnity {
     [SerializeField]
     private Rigidbody rd;
     [SerializeField]
@@ -46,11 +46,19 @@ public class PlayerControler : MonoBehaviour {
 
 
 
-    // Use this for initialization
-    void Awake () {
-	
-	}
+    
+    public override void Destroy()
+    {
+        base.Destroy();
+        Debug.Log("<color=blue><b>PLAYER HAS DIED</b></color>");
+    }
     void Update(){
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+
         if (mechineGunCoolDown <= 0){
             if (Input.GetAxis("Fire1") != 0){
                 if (mechineGunAmmo > 0){

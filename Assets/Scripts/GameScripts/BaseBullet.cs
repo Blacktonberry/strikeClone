@@ -34,6 +34,18 @@ public class BaseBullet : MonoBehaviour
                 }
                 KillBullet();
             }
+            else
+            {
+                target = collision.collider.transform.parent.GetComponent<BaseEnity>();
+                if (target != null)
+                {
+                    if (target.Faction != BulletSide)
+                    {
+                        target.Damage(bulletDamage);
+                    }
+                    KillBullet();
+                }
+            }
         }
     }
 
@@ -101,7 +113,7 @@ public class BaseBullet : MonoBehaviour
         }
         else if (transform.position.y > 500)
         {
-
+            Reset();
         }
     }
 
