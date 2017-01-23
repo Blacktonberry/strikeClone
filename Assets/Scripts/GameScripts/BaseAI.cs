@@ -41,6 +41,7 @@ public class BaseAI : BaseEnity {
                     targetAcquired = true;
                     AttemptToFire();
                 }
+                turretTurnPoint.LookAt(targetPoint);
             }
             else
             {

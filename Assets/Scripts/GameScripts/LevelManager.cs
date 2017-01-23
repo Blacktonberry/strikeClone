@@ -6,11 +6,19 @@ public class LevelManager : MonoBehaviour {
     public static LevelManager Instance;
     [SerializeField]
     private PoolHandeler poolHandeler;
-
+    [SerializeField]
     private bool radarActive = true;
+    
+    [SerializeField]
+    private PlayerControler playerCon;
 
+    [SerializeField]
+    private BaseEnity[] hostileEnitys;
+    //private System.Collections.Generic.List<BaseEnity> hostileEnitys;
+    [SerializeField]
+    private BaseEnity[] staticEnitys;
+    //private System.Collections.Generic.List<BaseEnity> staticEnitys;
 
-    public PlayerControler PlayerCon;
 
     void Awake()
     {
@@ -31,14 +39,59 @@ public class LevelManager : MonoBehaviour {
 
     public bool CanAiGetPlayer(ref Vector3 playerLocation)
     {
-        if (radarActive) { playerLocation = PlayerCon.transform.position; return true; }
+        playerLocation = playerCon.transform.position;
+        if (radarActive) {  return true; }
         else { return false; }
     }
 
     public Vector3 AiSeesPlayer()
     {
-        return PlayerCon.transform.position;
+        return playerCon.transform.position;
     }
+
+    public Vector3 PlayerGetTarget(Transform playerMainGun, float angle,float distance)
+    {
+        //for (int i = 0; i < hostileEnitys.Count; ++i)
+        Vector3 playerPos = playerMainGun.position;
+        Vector3 returnValue = Vector3.down;
+        float currentMaxDistance = distance;
+        float dist = 0;
+        for (int i = 0; i < hostileEnitys.Length; ++i)
+        {
+            if (!hostileEnitys[i].gameObject.activeSelf) { continue; }
+            dist = Vector3.Distance(hostileEnitys[i].transform.position, playerPos);
+            if (dist <= currentMaxDistance)
+            {
+                if (Vector3.Angle(hostileEnitys[i].transform.position - playerPos, playerMainGun.forward) < angle)
+                {
+                    currentMaxDistance = dist;
+                    returnValue = hostileEnitys[i].transform.position;
+                }
+
+            }
+        }
+        //no hostile get building
+        if (returnValue == Vector3.down)
+        {
+            for (int i = 0; i < staticEnitys.Length; ++i)
+            {
+                if (!hostileEnitys[i].gameObject.activeSelf) { continue; }
+                dist = Vector3.Distance(staticEnitys[i].transform.position, playerPos);
+                if (dist <= currentMaxDistance)
+                {
+                    if (Vector3.Angle(staticEnitys[i].transform.position - playerPos, playerMainGun.forward) < angle)
+                    {
+                        currentMaxDistance = dist;
+                        returnValue = staticEnitys[i].transform.position;
+                    }
+
+                }
+            }
+        }
+        return returnValue;
+    }
+
+    #region PoolHandeler
 
     public bool FireBullet(EnitySide newSide, Vector3 initalPosition, Quaternion initalDirection)
     {
@@ -59,6 +112,8 @@ public class LevelManager : MonoBehaviour {
     {
         return poolHandeler.SpaweExplosion(location);
     }
+    #endregion
+
 
 
     /// <summary>

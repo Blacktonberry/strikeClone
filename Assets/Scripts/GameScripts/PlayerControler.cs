@@ -62,7 +62,7 @@ public class PlayerControler : BaseEnity {
         if (mechineGunCoolDown <= 0){
             if (Input.GetAxis("Fire1") != 0){
                 if (mechineGunAmmo > 0){
-                    LevelManager.Instance.FireBullet(EnitySide.player, mechineGunMount.position, mechineGunMount.rotation);
+                    LevelManager.Instance.FireBullet(EnitySide.player, mechineGunMount.position, GetTargetRotation(mechineGunMount));
                     mechineGunCoolDown = mechineGunCoolDownMax;
                     mechineGunAmmo--;
                 }else{
@@ -83,11 +83,11 @@ public class PlayerControler : BaseEnity {
                 {
                     if (rocketSide)
                     {
-                        LevelManager.Instance.FireRocket(EnitySide.player, rocketMount1.position, rocketMount1.rotation);
+                        LevelManager.Instance.FireRocket(EnitySide.player, rocketMount1.position, GetTargetRotation(rocketMount1));
                     }
                     else
                     {
-                        LevelManager.Instance.FireRocket(EnitySide.player, rocketMount2.position, rocketMount2.rotation);
+                        LevelManager.Instance.FireRocket(EnitySide.player, rocketMount2.position,GetTargetRotation(rocketMount2));
                     }
                     rocketSide = !rocketSide;
                     rocketCoolDown = rocketCoolDownMax;
@@ -111,11 +111,11 @@ public class PlayerControler : BaseEnity {
                 {
                     if (missleSide)
                     {
-                        LevelManager.Instance.FireMissle(EnitySide.player, missleMount1.position, missleMount1.rotation);
+                        LevelManager.Instance.FireMissle(EnitySide.player, missleMount1.position, GetTargetRotation(missleMount1));
                     }
                     else
                     {
-                        LevelManager.Instance.FireMissle(EnitySide.player, missleMount2.position, missleMount2.rotation);
+                        LevelManager.Instance.FireMissle(EnitySide.player, missleMount2.position, GetTargetRotation(missleMount2));
                     }
                     missleSide = !missleSide;
                     missleCoolDown = missleCoolDownMax;
@@ -131,9 +131,19 @@ public class PlayerControler : BaseEnity {
         {
             missleCoolDown -= Time.deltaTime;
         }
-
-
     }
+
+    private Quaternion GetTargetRotation(Transform launchPos)
+    {
+        if (target == Vector3.down) {
+           return launchPos.rotation;
+        }
+        else
+        {
+            return Quaternion.LookRotation(target-launchPos.position, launchPos.up);
+        }
+    }
+
     //Update Physics
     void FixedUpdate() {
         ///these controls are simple to get to project moving plus get the more arcadey movment i wanted
@@ -156,5 +166,36 @@ public class PlayerControler : BaseEnity {
         ///TODO: tilt foward and backward when 
     }
 
+    void LateUpdate()
+    {
+        target = LevelManager.Instance.PlayerGetTarget(mechineGunMount, angle, targetDistance);
+
+    }
+    [SerializeField]
+    private float angle = 20;
+    [SerializeField]
+    private float targetDistance = 100;
+    /// <summary>
+    /// the Current target for auto aim set to Vector3.down if there is none
+    /// </summary>
+    [SerializeField]
+    private Vector3 target= Vector3.down;
+    void OnDrawGizmos()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(mechineGunMount.position, mechineGunMount.forward*10);
+            Gizmos.DrawRay(mechineGunMount.position, (Quaternion.AngleAxis(angle, mechineGunMount.up) * mechineGunMount.forward) * targetDistance);
+            Gizmos.DrawRay(mechineGunMount.position, (Quaternion.AngleAxis(-angle, mechineGunMount.up) * mechineGunMount.forward) * targetDistance);
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(mechineGunMount.position, (Quaternion.AngleAxis(angle, mechineGunMount.right) * mechineGunMount.forward) * targetDistance);
+            Gizmos.DrawRay(mechineGunMount.position, (Quaternion.AngleAxis(-angle, mechineGunMount.right) * mechineGunMount.forward) * targetDistance);
+            if (target != Vector3.down)
+            {
+                Gizmos.DrawLine(target, mechineGunMount.position);
+            }
+        }
+    }
 
 }

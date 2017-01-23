@@ -31,8 +31,8 @@ public class BaseBullet : MonoBehaviour
                 if (target.Faction != BulletSide)
                 {
                     target.Damage(bulletDamage);
+                    KillBullet();
                 }
-                KillBullet();
             }
             else
             {
@@ -42,8 +42,8 @@ public class BaseBullet : MonoBehaviour
                     if (target.Faction != BulletSide)
                     {
                         target.Damage(bulletDamage);
+                        KillBullet();
                     }
-                    KillBullet();
                 }
             }
         }
